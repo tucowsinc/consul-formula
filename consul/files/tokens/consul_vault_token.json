@@ -1,0 +1,9 @@
+{
+  "Description": "Vault token for vault servers",
+  "Policies": [
+     {
+        "Name": "vault"
+     }
+  ],
+  "Local": false
+}

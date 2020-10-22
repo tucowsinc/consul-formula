@@ -1,0 +1,9 @@
+{
+  "Description": "Agent token all nodes",
+  "Policies": [
+     {
+        "Name": "agent"
+     }
+  ],
+  "Local": false
+}

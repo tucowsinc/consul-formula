@@ -1,0 +1,9 @@
+{
+  "Description": "Anonymous access token",
+  "Policies": [
+     {
+        "Name": "anonymous"
+     }
+  ],
+  "Local": false
+}
