@@ -14,7 +14,7 @@ bootstrap-config:
     - mode: '0640'
     - require:
       - user: consul-user
-    {%- if consul.service %}
+    {%- if consulbootstrap.service %}
     - watch_in:
        - service: consul
     {%- endif %}
