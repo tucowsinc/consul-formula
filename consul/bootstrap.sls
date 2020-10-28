@@ -27,8 +27,6 @@ bootstrap-service:
 bootstrap-out-dir:
   file.directory:
     - name: /etc/consul.d/outputs/
-    - user: {{ consul.user }}
-    - group: {{ consul.group }}
     - mode: '0640'
 
 {% for file in salt['cp.list_master'](prefix='{{ tplroot }}/files/policies') %}
