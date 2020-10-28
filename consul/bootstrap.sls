@@ -83,23 +83,23 @@ vault-write-agent-token:
   module.run:
     - vault.write_secret:
       - path: kv/data/tenants/{{ pillar['tenant_name'] }}/bootstrap/consul/consul_agent_token
-      - id: {{ var-agent-token.SecretID }
+      - id: {{ varagenttoken.SecretID }}
 
-{% import_json '/etc/consul.d/outputs/consul_anon_token.json.out' as var-anon-token %}
+{% import_json '/etc/consul.d/outputs/consul_anon_token.json.out' as varanontoken %}
 
 vault-write-anon-token:
   module.run:
     - vault.write_secret:
       - path: kv/data/tenants/{{ pillar['tenant_name'] }}/bootstrap/consul/consul_anon_token
-      - id: {{ var-anon-token.SecretID }
+      - id: {{ varanontoken.SecretID }}
 
-{% import_json '/etc/consul.d/outputs/consul_vault_token.json.out' as var-vault-token %}
+{% import_json '/etc/consul.d/outputs/consul_vault_token.json.out' as varvaulttoken %}
 
 vault-write-vault-token:
   module.run:
     - vault.write_secret:
       - path: kv/data/tenants/{{ pillar['tenant_name'] }}/bootstrap/consul/consul_vault_token
-      - id: {{ var-vault-token.SecretID }
+      - id: {{ varvaulttoken.SecretID }}
 
 set-bootstrap-grain:
   grains.present:
