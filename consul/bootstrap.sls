@@ -8,9 +8,9 @@ bootstrap-config:
     - name: /etc/consul.d/config.json
     - encoding: utf-8
     - formatter: json
-    - dataset: {{ consul.config | json }}
-    - user: {{ consul.user }}
-    - group: {{ consul.group }}
+    - dataset: {{ consul-bootstrap.config | json }}
+    - user: {{ consul-bootstrap.user }}
+    - group: {{ consul-bootstrap.group }}
     - mode: '0640'
     - require:
       - user: consul-user
@@ -54,7 +54,7 @@ bootstrap-query-{{ file }}:
     - method: PUT
     - headers: True
     - header_list:
-      - 'X-Consul-Token: {{ consul.config.acl.tokens.master }}'
+      - 'X-Consul-Token: {{ consul-bootstrap.config.acl.tokens.master }}'
     - text_out="/etc/consul.d/outputs/{{ file }}.out"
     - data_file: /etc/consul.d/policies/{{ file }}
     - status: 200
@@ -69,7 +69,7 @@ bootstrap-query-{{ file }}:
     - method: PUT
     - headers: True
     - header_list:
-      - 'X-Consul-Token: {{ consul.config.acl.tokens.master }}'
+      - 'X-Consul-Token: {{ consul-bootstrap.config.acl.tokens.master }}'
     - data_file: /etc/consul.d/tokens/{{ file }}
     - text_out="/etc/consul.d/outputs/{{ file }}.out"
     - status: 200
