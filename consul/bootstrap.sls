@@ -76,4 +76,4 @@ bootstrap-query-{{ file }}:
     - text_out="/etc/consul.d/outputs/{{ file }}.out"
     - status: 200
 {% endfor %}
-
+{% endif %}
