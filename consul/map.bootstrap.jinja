@@ -16,7 +16,7 @@
         }
   }
   ,grain="cpuarch"
-  ,merge=consul)
+  ,merge=consulbootstrap)
 %}
 
 {% do consulbootstrap.config.update({'retry_join': consulbootstrap.config.retry_join or []}) %}
