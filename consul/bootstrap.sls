@@ -1,7 +1,7 @@
 {% if not salt['grains.get']('bootstrap') %}
 
 {%- set tplroot = tpldir.split('/')[0] %}
-{%- from tplroot + '/map.bootstrap.jinja' import consul with context -%}
+{%- from tplroot + '/map.bootstrap.jinja' import consulbootstrap with context -%}
 
 bootstrap-config:
   file.serialize:
