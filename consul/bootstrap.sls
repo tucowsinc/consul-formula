@@ -12,8 +12,6 @@ bootstrap-config:
     - user: {{ consulbootstrap.user }}
     - group: {{ consulbootstrap.group }}
     - mode: '0640'
-    - require:
-      - user: consul-user
     {%- if consulbootstrap.service %}
     - watch_in:
        - service: consul

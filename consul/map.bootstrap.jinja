@@ -1,5 +1,5 @@
 {%- set tplroot = tpldir.split('/')[0] %}
-{% import_yaml tplroot+"/defaults.yaml" as defaults %}
+{% import_yaml tplroot+"/defaults.bootstrap.yaml" as defaults %}
 
 {% set consulbootstrap = salt['pillar.get']('consulbootstrap', default=defaults.consul, merge=True) %}
 
