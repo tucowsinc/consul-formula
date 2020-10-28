@@ -77,29 +77,29 @@ bootstrap-query-{{ file }}:
     - status: 200
 {% endfor %}
 
-#{#% import_json '/etc/consul.d/outputs/consul_agent_token.json.out' as varagenttoken %}
+#{#% import_json '/etc/consul.d/outputs/consul_agent_token.json.out' as varagenttoken %#}
 #
 #vault-write-agent-token:
 #  module.run:
 #    - vault.write_secret:
 #      - path: kv/data/tenants/{{ pillar['tenant_name'] }}/bootstrap/consul/consul_agent_token
-#      - id: {{# varagenttoken.SecretID }}
+#      - id: {{# varagenttoken.SecretID #}}
 #
-#{#% import_json '/etc/consul.d/outputs/consul_anon_token.json.out' as varanontoken %}
+#{#% import_json '/etc/consul.d/outputs/consul_anon_token.json.out' as varanontoken %#}
 #
 #vault-write-anon-token:
 #  module.run:
 #    - vault.write_secret:
 #      - path: kv/data/tenants/{{ pillar['tenant_name'] }}/bootstrap/consul/consul_anon_token
-#      - id: {{# varanontoken.SecretID }}
+#      - id: {{# varanontoken.SecretID #}}
 #
-#{#% import_json '/etc/consul.d/outputs/consul_vault_token.json.out' as varvaulttoken %}
+#{#% import_json '/etc/consul.d/outputs/consul_vault_token.json.out' as varvaulttoken %#}
 #
 #vault-write-vault-token:
 #  module.run:
 #    - vault.write_secret:
 #      - path: kv/data/tenants/{{ pillar['tenant_name'] }}/bootstrap/consul/consul_vault_token
-#      - id: {{# varvaulttoken.SecretID }}
+#      - id: {{# varvaulttoken.SecretID #}}
 #
 #set-bootstrap-grain:
 #  grains.present:
