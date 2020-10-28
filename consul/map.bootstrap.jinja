@@ -1,10 +1,10 @@
 {%- set tplroot = tpldir.split('/')[0] %}
 {% import_yaml tplroot+"/defaults.yaml" as defaults %}
 
-{% set consul-bootstrap = salt['pillar.get']('consul-bootstrap', default=defaults.consul, merge=True) %}
+{% set consulbootstrap = salt['pillar.get']('consulbootstrap', default=defaults.consul, merge=True) %}
 
 {# Add any overrides based on CPU architecture. #}
-{% set consul-bootstrap = salt['grains.filter_by']({
+{% set consulbootstrap = salt['grains.filter_by']({
         'armv6l': {
             "arch": 'arm'
         },
@@ -19,4 +19,4 @@
   ,merge=consul)
 %}
 
-{% do consul-bootstrap.config.update({'retry_join': consul-bootstrap.config.retry_join or []}) %}
+{% do consulbootstrap.config.update({'retry_join': consulbootstrap.config.retry_join or []}) %}
