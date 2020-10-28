@@ -77,7 +77,7 @@ bootstrap-query-{{ file }}:
     - status: 200
 {% endfor %}
 
-{% import_json /etc/consul.d/outputs/consul_agent_token.json.out as var-agent-token %}
+{% import_json '/etc/consul.d/outputs/consul_agent_token.json.out' as var-agent-token %}
 
 vault-write-agent-token:
   module.run:
