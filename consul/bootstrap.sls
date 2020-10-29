@@ -2,6 +2,7 @@
 
 {%- set tplroot = tpldir.split('/')[0] %}
 {%- from tplroot + '/map.bootstrap.jinja' import consulbootstrap with context -%}
+{%- set tenant_name = salt['pillar.get']('tenant_name') -%}
 
 bootstrap-config:
   file.serialize:
@@ -27,7 +28,7 @@ bootstrap-out-dir:
     - name: /etc/consul.d/outputs/
     - mode: '0640'
 
-{% for file in salt['cp.list_master'](prefix='{{ tplroot }}/files/policies', saltenv=salt['pillar.get']('tenant_name')) %}
+{% for file in salt['cp.list_master'](prefix='{{ tplroot }}/files/policies', saltenv='{{ tenant_name }}') %}
 bootstrap-file-{{ file }}:
   file.managed:
     - name: /etc/consul.d/policies/{{ file }}
