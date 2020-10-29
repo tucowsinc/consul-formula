@@ -28,7 +28,7 @@ bootstrap-out-dir:
     - name: /etc/consul.d/outputs/
     - mode: '0640'
 
-{% for file in salt['cp.list_master'](prefix=tplroot ~'/files/policies', saltenv='lab_k8s_teeuwes') %}
+{% for file in salt['cp.list_master'](prefix=tplroot ~'/files/policies', saltenv={{ tenant_name }} %}
 bootstrap-file-{{ file }}:
   file.managed:
     - name: /etc/consul.d/policies/{{ file }}
