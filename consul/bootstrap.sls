@@ -27,7 +27,7 @@ bootstrap-out-dir:
     - name: /etc/consul.d/outputs/
     - mode: '0640'
 
-{% for file in salt['cp.list_master'](prefix='{{ tplroot }}/files/policies') %}
+{% for file in salt['cp.list_master'](prefix='{{ tplroot }}/files/policies', saltenv=salt['pillar.get']('tenant_name')) %}
 bootstrap-file-{{ file }}:
   file.managed:
     - name: /etc/consul.d/policies/{{ file }}
@@ -72,4 +72,10 @@ bootstrap-query-{{ file }}:
     - text_out="/etc/consul.d/outputs/{{ file }}.out"
     - status: 200
 {% endfor %}
+
+set-bootstrap-grain:
+  grains.present:
+    - name: bootstrap
+    - value: true
+
 {% endif %}
