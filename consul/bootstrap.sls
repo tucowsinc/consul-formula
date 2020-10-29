@@ -74,9 +74,4 @@ bootstrap-query-{{ file }}:
     - status: 200
 {% endfor %}
 
-set-bootstrap-grain:
-  grains.present:
-    - name: bootstrap
-    - value: true
-
 {% endif %}
