@@ -49,7 +49,7 @@ bootstrap-query-{{ file }}:
   http.query:
     - name:  https://{{ salt['grains.get']('primary_ipaddress') }}//v1/acl/policies
     - port: 8501
-    - ca_bundle: /etc/consul.d/certs/ca.crt #probably won't work
+    - ca_bundle: /etc/consul.d/certs/ca.crt
     - method: PUT
     - headers: True
     - header_list:
@@ -64,7 +64,7 @@ bootstrap-query-{{ file }}:
   http.query:
     - name:  https://{{ salt['grains.get']('primary_ipaddress') }}//v1/acl/token
     - port: 8501
-    - ca_bundle: /etc/consul.d/certs/ca.crt #probably won't work
+    - ca_bundle: /etc/consul.d/certs/ca.crt
     - method: PUT
     - headers: True
     - header_list:
