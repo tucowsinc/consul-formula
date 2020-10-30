@@ -47,7 +47,7 @@ bootstrap-file-{{ file }}:
 {% for file in salt['cp.list_master'](prefix=tplroot ~'/files/policies', saltenv=tenant_name) %}
 bootstrap-query-{{ file }}:
   http.query:
-    - name:  https://{{ salt['grains.get']('primary_ipaddress') }}//v1/acl/policies
+    - name: "https://{{ salt['grains.get']('primary_ipaddress') }}//v1/acl/policies"
     - port: 8501
     - ca_bundle: /etc/consul.d/certs/ca.crt
     - method: PUT
@@ -61,7 +61,7 @@ bootstrap-query-{{ file }}:
 {% for file in salt['cp.list_master'](prefix=tplroot ~'/files/tokens', saltenv=tenant_name) %}
 bootstrap-query-{{ file }}:
   http.query:
-    - name:  https://{{ salt['grains.get']('primary_ipaddress') }}//v1/acl/token
+    - name: "https://{{ salt['grains.get']('primary_ipaddress') }}//v1/acl/token"
     - port: 8501
     - ca_bundle: /etc/consul.d/certs/ca.crt
     - method: PUT
