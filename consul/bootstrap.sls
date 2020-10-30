@@ -36,7 +36,7 @@ bootstrap-file-{{ file }}:
     - source: salt://{{ file }}
 {% endfor %}
 
-{% for file in salt['cp.list_master'](prefix='{{ tplroot }}/files/tokens') %}
+{% for file in salt['cp.list_master'](prefix=tplroot ~'/files/tokens', saltenv=tenant_name) %}
 bootstrap-file-{{ file }}:
   file.managed:
     - name: /etc/consul.d/tokens/{{ file }}
@@ -44,7 +44,7 @@ bootstrap-file-{{ file }}:
     - source: salt://{{ tplroot }}/files/tokens/{{ file }}
 {% endfor %}
 
-{% for file in salt['cp.list_master'](prefix='{{ tplroot }}/files/policies') %}
+{% for file in salt['cp.list_master'](prefix=tplroot ~'/files/policies', saltenv=tenant_name) %}
 bootstrap-query-{{ file }}:
   http.query:
     - name:  https://{{ salt['grains.get']('primary_ipaddress') }}//v1/acl/policies
@@ -59,7 +59,7 @@ bootstrap-query-{{ file }}:
     - status: 200
 {% endfor %}
 
-{% for file in salt['cp.list_master'](prefix='{{ tplroot }}/files/tokens') %}
+{% for file in salt['cp.list_master'](prefix=tplroot ~'/files/tokens', saltenv=tenant_name) %}
 bootstrap-query-{{ file }}:
   http.query:
     - name:  https://{{ salt['grains.get']('primary_ipaddress') }}//v1/acl/token
