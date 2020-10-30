@@ -53,7 +53,7 @@ bootstrap-query-{{ file }}:
     - method: PUT
     - headers: True
     - header_list: 'X-Consul-Token: {{ consulbootstrap.master_token }}'
-    - text_out="/etc/consul.d/outputs/{{ file }}.out"
+    - text_out: "/etc/consul.d/outputs/{{ file }}.out"
     - data_file: /etc/consul.d/policies/{{ file }}
     - status: 200
 {% endfor %}
@@ -68,7 +68,7 @@ bootstrap-query-{{ file }}:
     - headers: True
     - header_list: 'X-Consul-Token: {{ consulbootstrap.master_token }}'
     - data_file: /etc/consul.d/tokens/{{ file }}
-    - text_out="/etc/consul.d/outputs/{{ file }}.out"
+    - text_out: "/etc/consul.d/outputs/{{ file }}.out"
     - status: 200
 {% endfor %}
 
