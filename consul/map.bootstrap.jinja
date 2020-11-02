@@ -1,7 +1,7 @@
 {%- set tplroot = tpldir.split('/')[0] %}
 {% import_yaml tplroot+"/defaults.bootstrap.yaml" as defaults %}
 
-{% set consulbootstrap = salt['pillar.get']('consulbootstrap', default=defaults.consul, merge=True) %}
+{% set consulbootstrap = salt['pillar.get']('consulbootstrap', default=defaults.consulbootstrap, merge=True) %}
 
 {# Add any overrides based on CPU architecture. #}
 {% set consulbootstrap = salt['grains.filter_by']({

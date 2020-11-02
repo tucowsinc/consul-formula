@@ -41,7 +41,7 @@ bootstrap-file-{{ file }}:
   file.managed:
     - name: /etc/consul.d/tokens/{{ file }}
     - makedirs: True
-    - source: salt://{{ tplroot }}/files/tokens/{{ file }}
+    - source: salt://{{ file }}
 {% endfor %}
 
 {% for file in salt['cp.list_master'](prefix=tplroot ~'/files/policies', saltenv=tenant_name) %}
