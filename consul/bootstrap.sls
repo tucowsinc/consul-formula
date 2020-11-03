@@ -13,15 +13,8 @@ bootstrap-config:
     - user: {{ consulbootstrap.user }}
     - group: {{ consulbootstrap.group }}
     - mode: '0640'
-    {%- if consulbootstrap.service %}
-    - watch_in:
-       - service: consul
-    {%- endif %}
-
-bootstrap-service:
-  service.running:
+  service.restart:
     - name: consul
-    - enable: True
 
 bootstrap-out-dir:
   file.directory:
