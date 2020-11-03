@@ -38,12 +38,10 @@ bootstrap-file-{{ file }}:
 {% for file in salt['cp.list_master'](prefix=tplroot ~'/files/policies', saltenv=tenant_name) %}
 bootstrap-query-{{ file }}:
   http.query:
-    - name: "https://{{ salt['grains.get']('primary_ipaddress') }}//v1/acl/policies"
-    - port: 8501
+    - name: "https://{{ salt['grains.get']('primary_ipaddress') }}:8501/v1/acl/policy"
     - ca_bundle: /etc/consul.d/certs/ca.crt
     - method: PUT
-    - headers: True
-    - header_list: 'X-Consul-Token: {{ consulbootstrap.master_token }}'
+    - header_dict: '{"X-Consul-Token": "{{ consulbootstrap.master_token }}"}'
     - text_out: "/etc/consul.d/outputs/{{ file }}.out"
     - data_file: /etc/consul.d/policies/{{ file }}
     - status: 200
@@ -52,12 +50,10 @@ bootstrap-query-{{ file }}:
 {% for file in salt['cp.list_master'](prefix=tplroot ~'/files/tokens', saltenv=tenant_name) %}
 bootstrap-query-{{ file }}:
   http.query:
-    - name: "https://{{ salt['grains.get']('primary_ipaddress') }}//v1/acl/token"
-    - port: 8501
+    - name: "https://{{ salt['grains.get']('primary_ipaddress') }}:8501/v1/acl/token"
     - ca_bundle: /etc/consul.d/certs/ca.crt
     - method: PUT
-    - headers: True
-    - header_list: 'X-Consul-Token: {{ consulbootstrap.master_token }}'
+    - header_list: '{"X-Consul-Token": "{{ consulbootstrap.master_token }}"}'
     - data_file: /etc/consul.d/tokens/{{ file }}
     - text_out: "/etc/consul.d/outputs/{{ file }}.out"
     - status: 200
