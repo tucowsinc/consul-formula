@@ -13,8 +13,6 @@ bootstrap-config:
     - user: {{ consulbootstrap.user }}
     - group: {{ consulbootstrap.group }}
     - mode: '0640'
-  service.restart:
-    - name: consul
 
 bootstrap-out-dir:
   file.directory:
