@@ -74,8 +74,7 @@ vault-write-agent-token:
   module.run:
     - vault.write_secret
       - path: "kv/data/tenants/" ~ tenant_name ~ "/bootstrap/moduletest/consul_agent_token"
-      - kwargs:
-          id: {{ vault_content_agent }}
+      - id: {{ vault_content_agent }}
 
 
 {% endif %}
