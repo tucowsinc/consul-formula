@@ -15,9 +15,9 @@ bootstrap-config:
     - mode: '0640'
 
 {% for file in salt['cp.list_master'](prefix=tplroot ~'/files/policies', saltenv=tenant_name) %}
-bootstrap-file-{{ file }}:
+bootstrap-file-{{ file.split(".")[3] }}:
   file.managed:
-    - name: /etc/consul.d/policies/{{ file }}
+    - name: /etc/consul.d/policies/{{ file.split(".")[3] }}
     - makedirs: True
     - source: salt://{{ file }}
 {% endfor %}
