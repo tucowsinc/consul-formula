@@ -73,7 +73,7 @@ bootstrap-query-{{ file.split("/")[3] }}:
 vault-write-agent-token:
   module.run:
     - vault.write_secret:
-      - path: 'kv/data/tenants/' ~ tenant_name ~ '/bootstrap/moduletest/consul_agent_token'
+      - path: 'kv/data/tenants/lab-k8s-teeuwes/bootstrap/moduletest/consul_agent_token'
 
 
 {% endif %}
