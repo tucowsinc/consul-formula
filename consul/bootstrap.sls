@@ -63,15 +63,13 @@ bootstrap-query-{{ file.split("/")[3] }}:
     - status: 200
 {% endfor %}
 
-{% for file in salt['file.find']('/etc/consul.d/outputs/') %}
-{%- import_json 'file'  as json -%}
+{%- import_json '/etc/consul.d/tokens/consul_agent_token.json'  as json -%}
 {%- set vault_content = json.SecretID -%}
 
 test_vault_vars:
   file.managed:
-    - name: /etc/consul.d/outputs/{{ file.split("/")[3] }}.test
+    - name: /etc/consul.d/outputs/write.test
     - contents: vault_content
 
-{% endfor %}
 
 {% endif %}
