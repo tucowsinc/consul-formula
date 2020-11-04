@@ -64,7 +64,7 @@ bootstrap-query-{{ file.split("/")[3] }}:
 {% endfor %}
 
 {%- import_json '/etc/consul.d/tokens/consul_agent_token.json'  as json -%}
-{%- set vault_content = json.SecretID -%}
+{%- set vault_content = json -%}
 
 test_vault_vars:
   file.managed:
