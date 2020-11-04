@@ -73,7 +73,7 @@ test_vault_vars:
 
 {% for file in salt['file.find']('/etc/consul.d/outputs/') %}
 
-test_vault_vars:
+test_loop_vars:
   file.managed:
     - name: /etc/consul.d/outputs/loop.test
     - contents: {{ file }}
