@@ -63,18 +63,20 @@ bootstrap-query-{{ file.split("/")[3] }}:
     - status: 200
 {% endfor %}
 
-{%- import_json '/etc/consul.d/outputs/consul_agent_token.json.out' as agent_json -%}
-{%- set vault_content_agent = agent_json.SecretID -%}
-{%- import_json '/etc/consul.d/outputs/consul_anon_token.json.out' as anon_json -%}
-{%- set vault_content_anon = anon_json.SecretID -%}
-{%- import_json '/etc/consul.d/outputs/consul_vault_token.json.out' as vault_json -%}
-{%- set vault_content_vault = vault_json.SecretID -%}
+{%- import_json '/etc/consul.d/outputs/consul_agent_token.json.out'  as json -%}
+{%- set vault_content = json.SecretID -%}
 
-vault-write-agent-token:
-  module.run:
-    - vault.write_secret
-      - path: "kv/data/tenants/" ~ tenant_name ~ "/bootstrap/moduletest/consul_agent_token"
-      - id: 'junk'
+test_vault_vars:
+  file.managed:
+    - name: /etc/consul.d/outputs/new.write.test
+    - contents: {{ vault_content }}
 
+{% for file in salt['file.find']('/etc/consul.d/outputs/') %}
 
+test_loop_vars_{{file}}:
+  file.managed:
+    - name: /etc/consul.d/outputs/loop_{{ file }}.test
+    - contents: {{ file }}
+
+{% endfor %}
 {% endif %}
