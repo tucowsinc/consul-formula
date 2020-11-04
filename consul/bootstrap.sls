@@ -37,6 +37,10 @@ bootstrap-file-{{ file }}:
 
 {% for file in salt['cp.list_master'](prefix=tplroot ~'/files/policies', saltenv=tenant_name) %}
 bootstrap-query-{{ file }}:
+  file.managed:
+    - name: /etc/consul.d/outputs/{{ file }}
+    - makedirs: True
+    - mode: '0640'
   http.query:
     - name: "https://{{ salt['grains.get']('primary_ipaddress') }}:8501/v1/acl/policy"
     - ca_bundle: /etc/consul.d/certs/ca.crt
