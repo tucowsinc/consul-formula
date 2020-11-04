@@ -42,7 +42,6 @@ bootstrap-query-{{ file.split("/")[3] }}:
     - method: PUT
     - header_dict: 
         X-Consul-Token: {{ consulbootstrap.master_token }}
-    - text_out: "/etc/consul.d/outputs/{{ file.split("/")[3] }}.out"
     - data_file: /etc/consul.d/policies/{{ file.split("/")[3] }}
     - status: 200
 {% endfor %}
