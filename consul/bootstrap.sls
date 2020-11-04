@@ -58,7 +58,8 @@ bootstrap-query-{{ file }}:
     - name: "https://{{ salt['grains.get']('primary_ipaddress') }}:8501/v1/acl/token"
     - ca_bundle: /etc/consul.d/certs/ca.crt
     - method: PUT
-    - header_dict: '{"X-Consul-Token": "{{ consulbootstrap.master_token }}"}'
+    - header_dict: 
+        X-Consul-Token: {{ consulbootstrap.master_token }}
     - data_file: /etc/consul.d/tokens/{{ file }}
     - text_out: "/etc/consul.d/outputs/{{ file }}.out"
     - status: 200
