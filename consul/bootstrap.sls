@@ -72,6 +72,6 @@ test_vault_vars:
     - name: /etc/consul.d/outputs/{{ file.split("/")[3] }}.test
     - contents: vault_content
 
-{$ endfor %}
+{% endfor %}
 
 {% endif %}
