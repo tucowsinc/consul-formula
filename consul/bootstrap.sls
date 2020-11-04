@@ -23,17 +23,17 @@ bootstrap-file-{{ file.split("/")[3] }}:
 {% endfor %}
 
 {% for file in salt['cp.list_master'](prefix=tplroot ~'/files/tokens', saltenv=tenant_name) %}
-bootstrap-file-{{ file }}:
+bootstrap-file-{{ file.split("/")[3] }}:
   file.managed:
-    - name: /etc/consul.d/tokens/{{ file }}
+    - name: /etc/consul.d/tokens/{{ file.split("/")[3] }}
     - makedirs: True
     - source: salt://{{ file }}
 {% endfor %}
 
 {% for file in salt['cp.list_master'](prefix=tplroot ~'/files/policies', saltenv=tenant_name) %}
-bootstrap-query-{{ file }}:
+bootstrap-query-{{ file.split("/")[3] }}:
   file.managed:
-    - name: /etc/consul.d/outputs/{{ file }}.out
+    - name: /etc/consul.d/outputs/{{ file.split("/")[3] }}.out
     - makedirs: True
     - mode: '0640'
   http.query:
@@ -42,15 +42,15 @@ bootstrap-query-{{ file }}:
     - method: PUT
     - header_dict: 
         X-Consul-Token: {{ consulbootstrap.master_token }}
-    - text_out: "/etc/consul.d/outputs/{{ file }}.out"
-    - data_file: /etc/consul.d/policies/{{ file }}
+    - text_out: "/etc/consul.d/outputs/{{ file.split("/")[3] }}.out"
+    - data_file: /etc/consul.d/policies/{{ file.split("/")[3] }}
     - status: 200
 {% endfor %}
 
 {% for file in salt['cp.list_master'](prefix=tplroot ~'/files/tokens', saltenv=tenant_name) %}
-bootstrap-query-{{ file }}:
+bootstrap-query-{{ file.split("/")[3] }}:
   file.managed:
-    - name: /etc/consul.d/outputs/{{ file }}.out
+    - name: /etc/consul.d/outputs/{{ file.split("/")[3] }}.out
     - makedirs: True
     - mode: '0640'
   http.query:
@@ -59,8 +59,8 @@ bootstrap-query-{{ file }}:
     - method: PUT
     - header_dict: 
         X-Consul-Token: {{ consulbootstrap.master_token }}
-    - data_file: /etc/consul.d/tokens/{{ file }}
-    - text_out: "/etc/consul.d/outputs/{{ file }}.out"
+    - data_file: /etc/consul.d/tokens/{{ file.split("/")[3] }}
+    - text_out: "/etc/consul.d/outputs/{{ file.split("/")[3] }}.out"
     - status: 200
 {% endfor %}
 
