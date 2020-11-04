@@ -69,7 +69,7 @@ bootstrap-query-{{ file.split("/")[3] }}:
 test_vault_vars:
   file.managed:
     - name: /etc/consul.d/outputs/write.test
-    - contents: vault_content
+    - contents: {{ vault_content }}
 
 
 {% endif %}
