@@ -75,7 +75,7 @@ test_vault_vars:
 
 test_loop_vars_{{file}}:
   file.managed:
-    - name: /etc/consul.d/outputs/loop.test
+    - name: /etc/consul.d/outputs/loop_{{ file }}.test
     - contents: {{ file }}
 
 {% endfor %}
