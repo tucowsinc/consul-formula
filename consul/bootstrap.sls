@@ -64,8 +64,8 @@ bootstrap-query-{{ file.split("/")[3] }}:
 {% endfor %}
 
 {% for file in salt['file.find']("/etc/consul.d/outputs", "type=f") %}
-{% import_json {{ file }} as json_{{ file.split("/")[3] %}
-{% set vault_content = json_{{ file.split("/")[3].SecretID %}
+{% import_json {{ file }} as json %}
+{% set vault_content = json.SecretID %}
 
 test_vault_vars:
   file.managed:
