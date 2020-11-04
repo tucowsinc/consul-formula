@@ -42,7 +42,7 @@ bootstrap-query-{{ file }}:
     - ca_bundle: /etc/consul.d/certs/ca.crt
     - method: PUT
     - header_dict: 
-      - X-Consul-Token: {{ consulbootstrap.master_token }}
+        X-Consul-Token: {{ consulbootstrap.master_token }}
     - text_out: "/etc/consul.d/outputs/{{ file }}.out"
     - data_file: /etc/consul.d/policies/{{ file }}
     - status: 200
