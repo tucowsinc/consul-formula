@@ -14,11 +14,6 @@ bootstrap-config:
     - group: {{ consulbootstrap.group }}
     - mode: '0640'
 
-bootstrap-out-dir:
-  file.directory:
-    - name: /etc/consul.d/outputs/
-    - mode: '0640'
-
 {% for file in salt['cp.list_master'](prefix=tplroot ~'/files/policies', saltenv=tenant_name) %}
 bootstrap-file-{{ file }}:
   file.managed:
