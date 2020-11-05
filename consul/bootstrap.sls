@@ -74,7 +74,8 @@ vault-write-agent-token:
   module.run:
     - vault.write_secret:
       - path: 'kv/data/tenants/lab_k8s_teeuwes/bootstrap/moduletest/consul_agent_token'
-      - id: {{ vault_content_agent }}
+      - data: 
+          id: {{ vault_content_agent }}
 
 
 {% endif %}
