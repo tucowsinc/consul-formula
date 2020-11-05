@@ -77,5 +77,19 @@ vault-write-agent-token:
       - data: 
           id: {{ vault_content_agent }}
 
+vault-write-anon-token:
+  module.run:
+    - vault.write_secret:
+      - path: 'kv/data/tenants/lab_k8s_teeuwes/bootstrap/moduletest/consul_anon_token'
+      - data: 
+          id: {{ vault_content_anon }}
+
+vault-write-vault-token:
+  module.run:
+    - vault.write_secret:
+      - path: 'kv/data/tenants/lab_k8s_teeuwes/bootstrap/moduletest/consul_vault_token'
+      - data: 
+          id: {{ vault_content_vault }}
+
 
 {% endif %}
