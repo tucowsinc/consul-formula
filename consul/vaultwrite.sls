@@ -1,4 +1,4 @@
-{% if not salt['grains.get']('bootstrap') %}
+{% if salt['grains.get']('bootstrap') and not salt['grains.get']('vaultwritten')%}
 {%- set tplroot = tpldir.split('/')[0] %}
 {%- from tplroot + '/map.bootstrap.jinja' import consulbootstrap with context -%}
 {%- set tenant_name = salt['pillar.get']('tenant_name') -%}
@@ -35,6 +35,13 @@ vault-write-vault-token:
       - path: 'kv/data/tenants/lab_k8s_teeuwes/bootstrap/moduletest/consul_vault_token'
       - data:
           id: {{ vault_content_vault }}
+{% endif %}
+
+{%- if salt['vault.read_secret']('kv/data/tenants/lab_k8s_teeuwes/bootstrap/moduletest/consul_vault_token') %}
+set-bootstrap-grain:
+  grains.present:
+    - name: vaultwritten
+    - value: True
 {% endif %}
 
 {% endif %}
