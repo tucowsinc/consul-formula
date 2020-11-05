@@ -1,9 +1,9 @@
 {% if not salt['grains.get']('bootstrap') %}
-
 {%- set tplroot = tpldir.split('/')[0] %}
 {%- from tplroot + '/map.bootstrap.jinja' import consulbootstrap with context -%}
 {%- set tenant_name = salt['pillar.get']('tenant_name') -%}
 
+{%- if salt['file.directory_exists' ]('/etc/consul.d/outputs') %}
 {%- import_json '/etc/consul.d/outputs/consul_agent_token.json.out' as agent_json -%}
 {%- set vault_content_agent = agent_json.SecretID -%}
 {%- import_json '/etc/consul.d/outputs/consul_anon_token.json.out' as anon_json -%}
@@ -32,4 +32,5 @@ vault-write-vault-token:
       - data:
           id: {{ vault_content_vault }}
 
+{% endif %}
 {% endif %}
