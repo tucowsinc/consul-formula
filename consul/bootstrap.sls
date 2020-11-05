@@ -14,6 +14,13 @@ bootstrap-config:
     - group: {{ consulbootstrap.group }}
     - mode: '0640'
 
+output-dir:
+  file.directory:
+    - name: /etc/consul.d/outputs
+    - user: {{ consulbootstrap.user }}
+    - group: {{ consulbootstrap.group }}
+    - mode: '0750'
+
 {% for file in salt['cp.list_master'](prefix=tplroot ~'/files/policies', saltenv=tenant_name) %}
 bootstrap-file-{{ file.split("/")[3] }}:
   file.managed:
@@ -32,10 +39,6 @@ bootstrap-file-{{ file.split("/")[3] }}:
 
 {% for file in salt['cp.list_master'](prefix=tplroot ~'/files/policies', saltenv=tenant_name) %}
 bootstrap-query-{{ file.split("/")[3] }}:
-  file.managed:
-    - name: /etc/consul.d/outputs/{{ file.split("/")[3] }}.out
-    - makedirs: True
-    - mode: '0640'
   http.query:
     - name: "https://{{ salt['grains.get']('primary_ipaddress') }}:8501/v1/acl/policy"
     - ca_bundle: /etc/consul.d/certs/ca.crt
@@ -48,10 +51,6 @@ bootstrap-query-{{ file.split("/")[3] }}:
 
 {% for file in salt['cp.list_master'](prefix=tplroot ~'/files/tokens', saltenv=tenant_name) %}
 bootstrap-query-{{ file.split("/")[3] }}:
-  file.managed:
-    - name: /etc/consul.d/outputs/{{ file.split("/")[3] }}.out
-    - makedirs: True
-    - mode: '0640'
   http.query:
     - name: "https://{{ salt['grains.get']('primary_ipaddress') }}:8501/v1/acl/token"
     - ca_bundle: /etc/consul.d/certs/ca.crt
