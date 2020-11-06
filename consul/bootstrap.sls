@@ -62,11 +62,11 @@ bootstrap-query-{{ file.split("/")[3] }}:
     - status: 200
 {% endfor %}
 
-{%- if salt['file.file_exists']('/etc/consul.d/outputs/consul_vault_token.json.out') %} 
 set-bootstrap-grain:
   grains.present:
     - name: bootstrap
     - value: True
-{% endif %}
+    - onlyif:
+      - test -f /etc/consul.d/outputs/consul_vault_token.json.out 
 
 {% endif %}
