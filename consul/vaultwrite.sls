@@ -10,7 +10,7 @@
 vault-write-agent-token:
   module.run:
     - vault.write_secret:
-      - path: 'kv/data/tenants/lab_k8s_teeuwes/bootstrap/moduletest/consul_agent_token'
+      - path: 'kv/data/tenants/{{ tenant_name }}/bootstrap/moduletest/consul_agent_token'
       - data:
           id: {{ vault_content_agent }}
 {% endif %}
@@ -21,7 +21,7 @@ vault-write-agent-token:
 vault-write-anon-token:
   module.run:
     - vault.write_secret:
-      - path: 'kv/data/tenants/lab_k8s_teeuwes/bootstrap/moduletest/consul_anon_token'
+      - path: 'kv/data/tenants/{{ tenant_name }}/bootstrap/moduletest/consul_anon_token'
       - data:
           id: {{ vault_content_anon }}
 {% endif %}
@@ -32,12 +32,12 @@ vault-write-anon-token:
 vault-write-vault-token:
   module.run:
     - vault.write_secret:
-      - path: 'kv/data/tenants/lab_k8s_teeuwes/bootstrap/moduletest/consul_vault_token'
+      - path: 'kv/data/tenants/{{ tenant_name }}/bootstrap/moduletest/consul_vault_token'
       - data:
           id: {{ vault_content_vault }}
 {% endif %}
 
-{%- if salt['vault.read_secret']('kv/data/tenants/lab_k8s_teeuwes/bootstrap/moduletest/consul_vault_token') %}
+{%- if salt['vault.read_secret']('kv/data/tenants/'~ tenant_name ~'/bootstrap/moduletest/consul_vault_token') %}
 set-bootstrap-grain:
   grains.present:
     - name: vaultwritten
