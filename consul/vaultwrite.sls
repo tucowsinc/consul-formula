@@ -42,6 +42,8 @@ set-bootstrap-grain:
   grains.present:
     - name: vaultwritten
     - value: True
+  module.run:
+    - state.apply:
 {% endif %}
 
 {% endif %}
