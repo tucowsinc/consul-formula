@@ -67,6 +67,8 @@ set-bootstrap-grain:
     - name: bootstrap
     - value: True
     - onlyif:
+      - test -f /etc/consul.d/outputs/consul_agent_token.json.out
+      - test -f /etc/consul.d/outputs/consul_anon_token.json.out
       - test -f /etc/consul.d/outputs/consul_vault_token.json.out
   module.run:
     - state.apply:
