@@ -1,0 +1,5 @@
+{
+  "Name": "anonymous",
+  "Description": "This policy will allows anonymous read access on all services (DNS interface)",
+  "Rules": "service_prefix \"\" { policy = \"read\"}"
+}

@@ -1,0 +1,5 @@
+{
+   "Name": "agent",
+   "Description": "This policy will allow all nodes to be registered and accessed and any service to be read.",
+   "Rules": "node_prefix \"\" { policy = \"write\"} service_prefix \"\" { policy = \"write\"} agent_prefix \"\" { policy = \"read\"}"
+ }
